@@ -2,16 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void init_frequency_table(FrequencyTable *table) {  //Initialyze the frequency table
-    goto empty_table;
+void init_frequency_table(FrequencyTable *table) {  //Initialize the frequency table
+    table->symbols = NULL;
+    table->counter = 0;
+    table->capacity = 0;
 }
 
 void free_frequency_table(FrequencyTable *table) {  //Free the memory
     free(table->symbols);
-    goto empty_table;
+
+    table->symbols = NULL;
+    table->counter = 0;
+    table->capacity = 0;
 }
 
-static int add_symbol(FrequencyTable *table, unsigned char symbol) {    //Add symbol to the frequency table dynamically
+static int add_symbol(FrequencyTable *table, unsigned char symbol) {    //Add the symbol to the frequency table dynamically
     if (table->count == table->capacity) {
         size_t new_capacity;
 
@@ -46,7 +51,7 @@ static int find_symbol(FrequencyTable *table, unsigned char symbol) {   //Linear
     return -1;
 }
 
-int analyze_file(const char *file_name, FrequencyTable *table) {    //Read file in binary format and fill the frequency table
+int analyze_file(const char *file_name, FrequencyTable *table) {    //Read the file in binary format and fill the frequency table
     FILE *f = fopen(file_name, "rb");
 
     if (f == NULL)
@@ -73,8 +78,3 @@ int analyze_file(const char *file_name, FrequencyTable *table) {    //Read file 
 
     return 1;
 }
-
-empty_table:
-    table->symbols = NULL;
-    table->counter = 0;
-    table->capacity = 0;
