@@ -49,7 +49,7 @@ static void find_lowest_frequency(Node **tree_array, size_t length, size_t *low_
     }
 }
 
-Node *build_tree(const FrequencyTable *table) { //Build tree according tot the Huffman algorithm
+Node *build_tree(const FrequencyTable *table) { //Build tree according to the Huffman algorithm
     if (!table || table->counter == 0)
         return NULL;
 
