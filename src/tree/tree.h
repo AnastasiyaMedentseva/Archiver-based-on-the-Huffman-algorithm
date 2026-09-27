@@ -1,4 +1,6 @@
-#include "../frequncy_table/frequency.h"
+#pragma once
+
+#include "../frequency_table/frequency.h"
 
 typedef struct Node{    //Structure for node in binary tree
     unsigned char symbol;
