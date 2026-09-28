@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../bitstream/bitstream.h"
+#include "../code_table/code.h"
 #include "../frequency_table/frequency.h"
 #include "../tree/tree.h"
-#include "../code_table/code.h"
-#include "../bitstream/bitstream.h"
 
 #define COMPRESSOR_FILE_ERROR 10
 #define COMPRESSOR_MEMORY_ERROR 11
@@ -13,4 +13,4 @@
 #define COMPRESSOR_CODE_NOT_FOUND 15
 #define COMPRESSOR_OVERFLOW 16
 
-int compress(const char *input_filename, const char *output_filename);
+int compress(const char* input_filename, const char* output_filename);
