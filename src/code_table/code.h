@@ -12,7 +12,7 @@ typedef struct {    // Structure for matching symbol with its code
 } SymbolCode;
 
 typedef struct {    // Structure for code table
-        struct SymbolCode* symbol_codes;
+        SymbolCode* symbol_codes;
         size_t counter;
         size_t capacity;
 } CodeTable;
