@@ -13,8 +13,17 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
+add_compile_options(
+    -Wall
+    -Wextra
+    -Wpedantic
+)
+
 if(ENABLE_ASAN)
-    add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+    add_compile_options(
+        -fsanitize=address
+        -fno-omit-frame-pointer
+    )
     add_link_options(-fsanitize=address)
 endif()
 
@@ -42,6 +51,10 @@ if(ENABLE_CLANG_FORMAT)
     )
 endif()
 
+if(ENABLE_CLANG_TIDY)
+    find_program(CLANG_TIDY clang-tidy REQUIRED)
+endif()
+
 add_library(archiver_core STATIC
     src/bitstream/bitstream.c
     src/code_table/code.c
@@ -63,8 +76,6 @@ add_executable(archiver
 target_link_libraries(archiver PRIVATE archiver_core)
 
 if(ENABLE_CLANG_TIDY)
-    find_program(CLANG_TIDY clang-tidy REQUIRED)
-
     set_target_properties(archiver_core archiver
         PROPERTIES
             C_CLANG_TIDY "${CLANG_TIDY}"
