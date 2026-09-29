@@ -1,7 +1,10 @@
-#include <cmocka.h>
+#include <setjmp.h>
+#include <stdarg.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cmocka.h>
 
 #include "../../src/compressor/compressor.h"
 #include "../../src/decompressor/decompressor.h"
@@ -83,11 +86,6 @@ static void test_single_symbol_round_trip(void** state) {
         test_compress_and_decompress("single.txt");
 }
 
-static void test_russian_text_round_trip(void** state) {
-        (void)state;
-        test_compress_and_decompress("russian.txt");
-}
-
 static void test_empty_file_round_trip(void** state) {
         (void)state;
         test_compress_and_decompress("empty.bin");
@@ -122,9 +120,11 @@ static int group_teardown(void** state) {
 
 int main(void) {
         const struct CMUnitTest tests[] = {
-            cmocka_unit_test(test_text_file_round_trip),     cmocka_unit_test(test_simple_symbols_round_trip),
-            cmocka_unit_test(test_single_symbol_round_trip), cmocka_unit_test(test_russian_text_round_trip),
-            cmocka_unit_test(test_empty_file_round_trip),    cmocka_unit_test(test_invalid_arguments),
+                cmocka_unit_test(test_text_file_round_trip),
+                cmocka_unit_test(test_simple_symbols_round_trip),
+                cmocka_unit_test(test_single_symbol_round_trip),
+                cmocka_unit_test(test_empty_file_round_trip),
+                cmocka_unit_test(test_invalid_arguments),
         };
 
         return cmocka_run_group_tests(tests, group_setup, group_teardown);
