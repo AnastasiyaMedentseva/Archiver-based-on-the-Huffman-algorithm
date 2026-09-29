@@ -42,7 +42,7 @@ jobs:
           sudo apt-get install -y clang-format
 
       - name: Configure
-        run: cmake -S . -B build-format -DENABLE_CLANG_FORMAT=ON
+        run: cmake -S . -B build-format -DENABLE_CLANG_FORMAT=ON -DBUILD_TESTS=OFF
 
       - name: Check formatting
         run: cmake --build build-format --target format-check
