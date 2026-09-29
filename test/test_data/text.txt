@@ -1,0 +1,1 @@
+Huffman coding is a lossless compression algorithm that is quite simple to implement and interesting because it constructs the theoretically minimal code sequence for each symbol.
