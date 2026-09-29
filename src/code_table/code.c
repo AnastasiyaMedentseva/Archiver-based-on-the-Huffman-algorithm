@@ -60,7 +60,7 @@ static int add_code(CodeTable* table, unsigned char symbol,
                 return CODE_MEMORY_ERROR;
         }
 
-        strcpy(new_code, code);
+        memcpy(new_code, code, code_length + 1);
 
         table->symbol_codes[table->counter].symbol = symbol;
         table->symbol_codes[table->counter].code = new_code;
@@ -84,7 +84,7 @@ static int DFS(const Node* node, char** path, size_t depth,
 
         *path = new_path;
 
-        if (!node->left && !node->right) {    // leaf node has symbol
+        if (!node->left && !node->right) {    // Leaf node has symbol
                 if (depth == 0) {
                         (*path)[0] = '0';
                         (*path)[1] = '\0';
