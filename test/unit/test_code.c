@@ -80,9 +80,9 @@ static void test_invalid_code_arguments(void** state) {
 
 int main(void) {
         const struct CMUnitTest tests[] = {
-                cmocka_unit_test(test_simple_code),
-                cmocka_unit_test(test_single_symbol_code),
-                cmocka_unit_test(test_all_symbols_code),
+            cmocka_unit_test(test_simple_code),
+            cmocka_unit_test(test_single_symbol_code),
+            cmocka_unit_test(test_all_symbols_code),
             cmocka_unit_test(test_invalid_code_arguments),
         };
 

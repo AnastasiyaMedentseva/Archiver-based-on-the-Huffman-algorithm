@@ -85,12 +85,9 @@ static void test_invalid_arguments(void** state) {
 
 int main(void) {
         const struct CMUnitTest tests[] = {
-                cmocka_unit_test(test_simple_file),
-                cmocka_unit_test(test_single_symbol_file),
-                cmocka_unit_test(test_text_file),
-                cmocka_unit_test(test_all_symbols_file),
-                cmocka_unit_test(test_empty_file),
-                cmocka_unit_test(test_invalid_arguments),
+            cmocka_unit_test(test_simple_file), cmocka_unit_test(test_single_symbol_file),
+            cmocka_unit_test(test_text_file),   cmocka_unit_test(test_all_symbols_file),
+            cmocka_unit_test(test_empty_file),  cmocka_unit_test(test_invalid_arguments),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);
