@@ -1,6 +1,8 @@
 #include "test_utils.h"
-#include <cmocka.h>
+#include <setjmp.h>
+#include <stdarg.h>
 #include <string.h>
+#include <cmocka.h>
 
 static void build_from_file(const char* name, FrequencyTable* frequency_table, Node** root, CodeTable* code_table) {
         init_frequency_table(frequency_table);
@@ -81,7 +83,7 @@ int main(void) {
                 cmocka_unit_test(test_simple_code),
                 cmocka_unit_test(test_single_symbol_code),
                 cmocka_unit_test(test_all_symbols_code),
-                cmocka_unit_test(test_invalid_code_arguments),
+            cmocka_unit_test(test_invalid_code_arguments),
         };
 
         return cmocka_run_group_tests(tests, NULL, NULL);

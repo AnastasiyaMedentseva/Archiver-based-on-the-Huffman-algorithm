@@ -1,6 +1,8 @@
 #include "test_utils.h"
-#include <cmocka.h>
+#include <setjmp.h>
+#include <stdarg.h>
 #include <string.h>
+#include <cmocka.h>
 
 static void test_simple_file(void** state) {
         (void)state;

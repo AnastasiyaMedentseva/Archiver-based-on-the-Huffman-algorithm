@@ -1,4 +1,6 @@
 #include "test_utils.h"
+#include <setjmp.h>
+#include <stdarg.h>
 #include <cmocka.h>
 
 static size_t count_leaves(const Node* node) {

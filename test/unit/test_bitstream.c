@@ -1,7 +1,9 @@
 #include "../../src/bitstream/bitstream.h"
 #include "test_utils.h"
-#include <cmocka.h>
+#include <setjmp.h>
+#include <stdarg.h>
 #include <stdio.h>
+#include <cmocka.h>
 
 static void test_partial_byte_flush(void** state) {
         (void)state;
