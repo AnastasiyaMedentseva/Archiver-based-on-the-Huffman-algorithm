@@ -75,6 +75,12 @@ add_executable(archiver
 
 target_link_libraries(archiver PRIVATE archiver_core)
 
+add_executable(experiment
+        experiments/experiments.c
+)
+
+target_link_libraries(experiment PRIVATE archiver_core m)
+
 if(ENABLE_CLANG_TIDY)
     set_target_properties(archiver_core archiver
         PROPERTIES
