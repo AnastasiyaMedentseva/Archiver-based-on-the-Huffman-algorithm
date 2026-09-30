@@ -1,0 +1,13 @@
+type,filename,repetitions,successful_runs,original_size,compressed_size,compression_ratio_mean,compression_ratio_stddev,compression_time_mean,compression_time_stddev,decompression_time_mean,decompression_time_stddev
+text_small,experiments/data/text/text_100kb.txt,10,10,104577,60908,0.582423,0.000000,0.041926,0.002734,0.024276,0.011840
+text_medium,experiments/data/text/text_1mb.txt,10,10,1113388,640179,0.574983,0.000000,0.519511,0.052281,0.218923,0.034560
+text_large,experiments/data/text/text_10mb.txt,10,10,11133880,6396767,0.574532,0.000000,4.553884,0.329311,1.862052,0.301348
+repetitive_small,experiments/data/repetitive/repetitive_100kb.txt,10,10,123340,15693,0.127234,0.000000,0.024339,0.005866,0.012423,0.000853
+repetitive_medium,experiments/data/repetitive/repetitive_1mb.txt,10,10,997838,126798,0.127073,0.000000,0.141124,0.034969,0.094728,0.026518
+repetitive_large,experiments/data/repetitive/repetitive_10mb.txt,10,10,7982704,1014219,0.127052,0.000000,0.927815,0.076581,0.544638,0.083992
+random_small,experiments/data/random/random_100kb.bin,10,10,102400,103688,1.012578,0.000000,0.084577,0.007536,0.030806,0.005078
+random_medium,experiments/data/random/random_1mb.bin,10,10,1048576,1049864,1.001228,0.000000,0.836970,0.146421,0.271307,0.024748
+random_large,experiments/data/random/random_10mb.bin,10,10,10485760,10487048,1.000123,0.000000,7.716521,0.335577,2.406016,0.297795
+compressed_small,experiments/data/compressed/text_100kb.bin,10,10,60908,61064,1.002561,0.000000,0.055589,0.009542,0.019819,0.007923
+compressed_medium,experiments/data/compressed/text_1mb.bin,10,10,640179,633294,0.989245,0.000000,0.508618,0.057366,0.158527,0.025918
+compressed_large,experiments/data/compressed/text_10mb.bin,10,10,6396767,6315442,0.987287,0.000000,4.912128,0.205872,1.724266,0.168807
