@@ -2,6 +2,8 @@
 
 Программа-архиватор на языке C, использующая алгоритм Хаффмана для сжатия и распаковки файлов.
 
+[![CI](https://github.com/AnastasiyaMedentseva/Archiver-based-on-the-Huffman-algorithm/actions/workflows/ci.yml/badge.svg)](https://github.com/AnastasiyaMedentseva/Archiver-based-on-the-Huffman-algorithm/actions/workflows/ci.yml)
+
 ## Описание проекта
 
 Проект состоит из нескольких модулей:
