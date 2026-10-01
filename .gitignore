@@ -58,8 +58,5 @@ dkms.conf
 .idea/
 
 # Program execution side files
-build/
-build-sanitize/
-build-valgrind/
-build-tidy/
-build-format/
+build*/
+cmake-build*/
