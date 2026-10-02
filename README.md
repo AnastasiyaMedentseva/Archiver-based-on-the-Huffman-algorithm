@@ -2,6 +2,8 @@
 
 Программа-архиватор на языке C, использующая алгоритм Хаффмана для сжатия и распаковки файлов.
 
+[![CI](https://github.com/AnastasiyaMedentseva/Archiver-based-on-the-Huffman-algorithm/actions/workflows/ci.yml/badge.svg)](https://github.com/AnastasiyaMedentseva/Archiver-based-on-the-Huffman-algorithm/actions/workflows/ci.yml)
+
 ## Описание проекта
 
 Проект состоит из нескольких модулей:
@@ -224,14 +226,16 @@ CI запускается для Pull Request в ветку `main`.
 
 Проект поддерживает проведение экспериментов.
 
-Исходные файлы и результаты замеров производительности находятся в директории `experiments`.
+Необходима сборка в режиме `Release`.
+
+Исходные файлы и результаты замеров производительности находятся в директории `experiments`. 
 
 В качестве входных данных созданы файлы следующих типов:
 
 - Текстовые данные
 - Повторяющиеся текстовые данные
 - Случайные данные
-- Сжатые архиватором данные
+- Сжатые архиватором текстовые данные
 
 Для каждого типа доступны файлы размером 100 KB, 1 MB и 10 MB.
 
@@ -252,7 +256,7 @@ CI запускается для Pull Request в ветку `main`.
 Запуск экспериментов:
 
 ```bash
-cmake -S . -B build-experiment
+cmake -S . -B build-experiment -DCMAKE_BUILD_TYPE=Release
 cmake --build build-experiment
-./build-experiment/experiments
+./build-experiment/experiment
 ```
