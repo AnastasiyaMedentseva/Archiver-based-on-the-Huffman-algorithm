@@ -3,15 +3,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct Node {    // Structure for node in binary tree
+        unsigned char symbol;
+        unsigned int frequency;
+        struct Node *left, *right;
+};
+
+unsigned char symbol_Node(const Node* node) {    // Access to symbol field in Node structure
+        return node->symbol;
+}
+
+unsigned int frequency_Node(const Node* node) {    // Access to frequency field in Node structure
+        return node->frequency;
+}
+
+const Node* left_Node(const Node* node) {    // Access to left field in Node structure
+        return node->left;
+}
+
+const Node* right_Node(const Node* node) {    // Acces to right field in Node structure
+        return node->right;
+}
+
+void set_symbol_Node(Node* node, unsigned char symbol) {    // Setter for symbol field in Node structure
+        if (node)
+                node->symbol = symbol;
+}
+
+void set_frequency_Node(Node* node, unsigned int frequency) {    // Setter for frequency field in Node structure
+        if (node)
+                node->frequency = frequency;
+}
+
+void set_left_Node(Node* node, Node* left) {    // Setter for left field in Node structure
+        if (node)
+                node->left = left;
+}
+
+void set_right_Node(Node* node, Node* right) {    // Setter for right field in Node structure
+        if (node)
+                node->right = right;
+}
+
 static Node* create_node(unsigned char symbol,
                          unsigned int frequency) {    // Create tree node for symbol with left and right subtrees
         Node* node = (Node*)malloc(sizeof(Node));
 
-        if (!node) {
-                printf("Error: could not allocate memory for node\n");
-
+        if (!node)
                 return NULL;
-        }
 
         node->symbol = symbol;
         node->frequency = frequency;
@@ -35,15 +74,15 @@ static void free_tree_array(Node** tree_array, size_t length) {    // Free tree 
                 free_tree(tree_array[i]);
 }
 
-static void
-find_lowest_frequency(Node** tree_array, size_t length, size_t* low_index_1,
-                      size_t* low_index_2) {    // Find two symbols with lowest frequencies in order to merge subtrees
+static void find_lowest_frequency(
+    Node** tree_array, size_t length, size_t* low_index_1,
+    size_t* low_index_2) {    // Find two symbols with the lowest frequencies in order to merge subtrees
         *low_index_1 = 0;
         *low_index_2 = 1;
 
         if (tree_array[*low_index_1]->frequency >
-            tree_array[*low_index_2]->frequency) {    // Guarantee the right order of subtrees with lowest frequencies
-                                                      // (low_index_1 < low_index_2)
+            tree_array[*low_index_2]->frequency) {    // Guarantee the right order of subtrees with the lowest
+                                                      // frequencies (low_index_1 < low_index_2)
                 size_t temp = *low_index_1;
                 *low_index_1 = *low_index_2;
                 *low_index_2 = temp;
@@ -59,24 +98,24 @@ find_lowest_frequency(Node** tree_array, size_t length, size_t* low_index_1,
 }
 
 Node* build_tree(const FrequencyTable* table) {    // Build tree according to the Huffman algorithm
-        if (!table || table->counter == 0) {
-                printf("Error: invalid frequency table\n");
-
+        if (!table)
                 return NULL;
-        }
 
-        Node** tree_array = malloc(table->counter * sizeof(Node*));
+        size_t table_counter = counter_FrequencyTable(table);
 
-        if (!tree_array) {
-                printf("Error: could not allocate memory for tree array\n");
-
+        if (table_counter == 0)
                 return NULL;
-        }
+
+        Node** tree_array = malloc(table_counter * sizeof(Node*));
+
+        if (!tree_array)
+                return NULL;
 
         size_t tree_counter = 0;
 
-        for (size_t i = 0; i < table->counter; i++) {    // Create tree for every symbol
-                tree_array[i] = create_node(table->symbols[i].symbol, table->symbols[i].frequency);
+        for (size_t i = 0; i < table_counter; i++) {    // Create tree for every symbol
+                tree_array[i] = create_node(symbol_SymbolFrequency(symbol_frequency_FrequencyTable(table, i)),
+                                            frequency_SymbolFrequency(symbol_frequency_FrequencyTable(table, i)));
 
                 if (!tree_array[i]) {
                         free_tree_array(tree_array, tree_counter);
@@ -93,7 +132,6 @@ Node* build_tree(const FrequencyTable* table) {    // Build tree according to th
                 find_lowest_frequency(tree_array, tree_counter, &low_index_1, &low_index_2);
 
                 if (UINT_MAX - tree_array[low_index_1]->frequency < tree_array[low_index_2]->frequency) {
-                        printf("Error: frequency table overflow\n");
                         free_tree_array(tree_array, tree_counter);
                         free(tree_array);
 

@@ -14,6 +14,7 @@
 - Модуль работы с битовым потоком (чтение и запись)
 - Модуль компрессии (сжатия)
 - Модуль декомпрессии (распаковки)
+- Модуль интерфейса командной строки
 
 Помимо этого в проекте есть модульные и интеграционные тесты, с помощью которых можно проверить работу как отдельных компонентов, так и всей программы целиком.
 Также настроены автоматические проверки качества кода.
@@ -31,13 +32,13 @@
 │   └── workflows/
 │       └── ci.yml
 ├── src/
-│   ├── bitstream/
-│   ├── code_table/
-│   ├── compressor/
-│   ├── decompressor/
-│   ├── frequency_table/
-│   ├── tree/
-│   ├── cli/
+│   ├── frequency.c, frequency.h
+│   ├── tree.c, tree.h
+│   ├── code.h, code.c
+│   ├── bitstream.h, bitstream.c
+│   ├── compressor.h, compressor.c
+│   ├── decompressor.h, decompressor.c
+│   ├── cli.h, cli.c
 │   └── main.c
 ├── test/
 │   ├── unit/
@@ -226,7 +227,8 @@ CI запускается для Pull Request в ветку `main`.
 
 Проект поддерживает проведение экспериментов.
 
-Необходима сборка в режиме `Release`.
+Тип сборки —— Release.
+Опции компиляции —— -O3, -march=native.
 
 Исходные файлы и результаты замеров производительности находятся в директории `experiments`. 
 
@@ -257,6 +259,6 @@ CI запускается для Pull Request в ветку `main`.
 
 ```bash
 cmake -S . -B build-experiment -DCMAKE_BUILD_TYPE=Release
-cmake --build build-experiment
+cmake --build build-experiment --target experiment
 ./build-experiment/experiment
 ```

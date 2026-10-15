@@ -1,4 +1,4 @@
-#include "test_utils.h"
+#include "../test_utils.h"
 #include <setjmp.h>
 #include <stdarg.h>
 #include <string.h>
@@ -6,81 +6,81 @@
 
 static void test_simple_file(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(test_data_path("simple.txt"), &frequency_table), 0);
-        assert_int_equal(frequency_table.counter, 3);
-        assert_int_equal(find_frequency(&frequency_table, 'a')->frequency, 1);
-        assert_int_equal(find_frequency(&frequency_table, 'b')->frequency, 2);
-        assert_int_equal(find_frequency(&frequency_table, 'c')->frequency, 3);
+        assert_int_equal(analyze_file(test_data_path("simple.txt"), frequency_table), 0);
+        assert_int_equal(counter_FrequencyTable(frequency_table), 3);
+        assert_int_equal(find_frequency(frequency_table, 'a'), 1);
+        assert_int_equal(find_frequency(frequency_table, 'b'), 2);
+        assert_int_equal(find_frequency(frequency_table, 'c'), 3);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 static void test_single_symbol_file(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(test_data_path("single.txt"), &frequency_table), 0);
-        assert_int_equal(frequency_table.counter, 1);
-        assert_int_equal(find_frequency(&frequency_table, 'a')->frequency, 10);
+        assert_int_equal(analyze_file(test_data_path("single.txt"), frequency_table), 0);
+        assert_int_equal(counter_FrequencyTable(frequency_table), 1);
+        assert_int_equal(find_frequency(frequency_table, 'a'), 10);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 static void test_text_file(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(test_data_path("text.txt"), &frequency_table), 0);
-        assert_int_equal(frequency_table.counter, 23);
-        assert_int_equal(find_frequency(&frequency_table, 'H')->frequency, 1);
-        assert_int_equal(find_frequency(&frequency_table, 'a')->frequency, 9);
-        assert_int_equal(find_frequency(&frequency_table, 'e')->frequency, 18);
-        assert_int_equal(find_frequency(&frequency_table, 'y')->frequency, 2);
-        assert_int_equal(find_frequency(&frequency_table, ' ')->frequency, 25);
+        assert_int_equal(analyze_file(test_data_path("text.txt"), frequency_table), 0);
+        assert_int_equal(counter_FrequencyTable(frequency_table), 23);
+        assert_int_equal(find_frequency(frequency_table, 'H'), 1);
+        assert_int_equal(find_frequency(frequency_table, 'a'), 9);
+        assert_int_equal(find_frequency(frequency_table, 'e'), 18);
+        assert_int_equal(find_frequency(frequency_table, 'y'), 2);
+        assert_int_equal(find_frequency(frequency_table, ' '), 25);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 static void test_all_symbols_file(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(test_data_path("all_symbols.txt"), &frequency_table), 0);
-        assert_int_equal(frequency_table.counter, 94);
+        assert_int_equal(analyze_file(test_data_path("all_symbols.txt"), frequency_table), 0);
+        assert_int_equal(counter_FrequencyTable(frequency_table), 94);
 
-        for (size_t i = 0; i < frequency_table.counter; ++i)
-                assert_int_equal(frequency_table.symbols[i].frequency, 1);
+        for (size_t i = 0; i < counter_FrequencyTable(frequency_table); ++i)
+                assert_int_equal(frequency_SymbolFrequency(symbol_frequency_FrequencyTable(frequency_table, i)), 1);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 static void test_empty_file(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(test_data_path("empty.bin"), &frequency_table), 0);
-        assert_int_equal(frequency_table.counter, 0);
+        assert_int_equal(analyze_file(test_data_path("empty.bin"), frequency_table), 0);
+        assert_int_equal(counter_FrequencyTable(frequency_table), 0);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 static void test_invalid_arguments(void** state) {
         (void)state;
-        FrequencyTable frequency_table;
-        init_frequency_table(&frequency_table);
+        FrequencyTable* frequency_table = create_FrequencyTable();
+        assert_non_null(frequency_table);
 
-        assert_int_equal(analyze_file(NULL, &frequency_table), FREQUENCY_INVALID_ARGUMENT);
+        assert_int_equal(analyze_file(NULL, frequency_table), FREQUENCY_INVALID_ARGUMENT);
         assert_int_equal(analyze_file(test_data_path("text.txt"), NULL), FREQUENCY_INVALID_ARGUMENT);
-        assert_int_equal(analyze_file("test/test_data/no-such-file.bin", &frequency_table), FREQUENCY_FILE_ERROR);
+        assert_int_equal(analyze_file("test/test_data/no-such-file.bin", frequency_table), FREQUENCY_FILE_ERROR);
 
-        free_frequency_table(&frequency_table);
+        destroy_FrequencyTable(frequency_table);
 }
 
 int main(void) {

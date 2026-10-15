@@ -1,5 +1,5 @@
-#include "../src/compressor/compressor.h"
-#include "../src/decompressor/decompressor.h"
+#include "../src/compressor.h"
+#include "../src/decompressor.h"
 #include <math.h>
 #include <stdio.h>
 #include <string.h>

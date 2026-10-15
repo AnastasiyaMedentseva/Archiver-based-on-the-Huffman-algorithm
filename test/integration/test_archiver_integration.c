@@ -1,3 +1,6 @@
+#include "../../src/compressor.h"
+#include "../../src/decompressor.h"
+#include "../test_utils.h"
 #include <setjmp.h>
 #include <stdarg.h>
 #include <stddef.h>
@@ -5,10 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <cmocka.h>
-
-#include "../../src/compressor/compressor.h"
-#include "../../src/decompressor/decompressor.h"
-#include "../unit/test_utils.h"
 
 #define TEST_ARCHIVE_FILE "test/test_data/.test_archive.bin"
 #define TEST_OUTPUT_FILE "test/test_data/.test_output.bin"

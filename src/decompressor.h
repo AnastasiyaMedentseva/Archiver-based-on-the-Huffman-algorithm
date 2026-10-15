@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../bitstream/bitstream.h"
-#include "../frequency_table/frequency.h"
-#include "../tree/tree.h"
+#include "bitstream.h"
+#include "frequency.h"
+#include "tree.h"
 
 #define DECOMPRESSOR_FILE_ERROR 17
 #define DECOMPRESSOR_MEMORY_ERROR 18
