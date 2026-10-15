@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../bitstream/bitstream.h"
-#include "../code_table/code.h"
-#include "../frequency_table/frequency.h"
-#include "../tree/tree.h"
+#include "bitstream.h"
+#include "code.h"
+#include "frequency.h"
+#include "tree.h"
 
 #define COMPRESSOR_FILE_ERROR 10
 #define COMPRESSOR_MEMORY_ERROR 11

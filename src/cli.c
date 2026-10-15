@@ -1,6 +1,6 @@
-#include "cli.h"
-#include "../compressor/compressor.h"
-#include "../decompressor/decompressor.h"
+#include "../include/cli.h"
+#include "compressor.h"
+#include "decompressor.h"
 #include <stdio.h>
 #include <string.h>
 
