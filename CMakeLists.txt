@@ -56,13 +56,13 @@ if(ENABLE_CLANG_TIDY)
 endif()
 
 add_library(archiver_core STATIC
-    src/bitstream/bitstream.c
-    src/code_table/code.c
-    src/compressor/compressor.c
-    src/decompressor/decompressor.c
-    src/frequency_table/frequency.c
-    src/tree/tree.c
-    src/cli/cli.c
+    src/bitstream.c
+    src/code.c
+    src/compressor.c
+    src/decompressor.c
+    src/frequency.c
+    src/tree.c
+    src/cli.c
 )
 
 target_include_directories(archiver_core PUBLIC
@@ -77,6 +77,11 @@ target_link_libraries(archiver PRIVATE archiver_core)
 
 add_executable(experiment
         experiments/experiments.c
+)
+
+target_compile_options(experiment PRIVATE
+        $<$<CONFIG:Release>:-O3>
+        $<$<CONFIG:Release>:-march=native>
 )
 
 target_link_libraries(experiment PRIVATE archiver_core m)
